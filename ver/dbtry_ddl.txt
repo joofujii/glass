@@ -1,0 +1,15 @@
+
+
+CREATE TABLE `glass_comment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'key id',
+  `image` varchar(63) NOT NULL DEFAULT 'image0' COMMENT 'photo image name',
+  `person` text,
+  `comment` varchar(255) NOT NULL DEFAULT 'Nice!' COMMENT 'comment by viewer',
+  `check_flag` smallint(6) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `image` (`image`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='temp setting'
+
+

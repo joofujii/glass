@@ -1,0 +1,14 @@
+
+
+CREATE TABLE `image` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'key id',
+  `iname` varchar(63) NOT NULL DEFAULT 'image0' COMMENT 'photo image name',
+  `iowner` text,
+  `iflag` smallint(6) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `iname` (`iname`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='temp setting'
+
+
