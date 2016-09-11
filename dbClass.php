@@ -1,6 +1,4 @@
 <?php
-namespace Comment;
-
 ini_set( 'display_errors', "1" );
 error_reporting(-1);
 
@@ -25,11 +23,20 @@ class DbClass{
 		mysql_close($link);
         $arr_com = array();
 		while($row = mysql_fetch_assoc($result)){
+			//$row = mysql_fetch_assoc($result);
 			if ($row['cowner'] == 'XXX') {
 				throw new Exception ('「Exceptionって知ってる？<br>知らないよね。<br>じゃあいいや、気にしないでねｗ」');
 			}
+            //TODO
+	        //print_r($row);
+            //echo '<hr>row<br>';
 			$arr_com[ ] = $row;
+			//print('<hr>id=' . $row['id']);
+			//print('<br>iid=' .  $arr_com[0]['iid']);
+			//print('<br>cline=' . $row['cline']);
+			//print('<br>cowner=' . $row['cowner']);
 		}
+		//echo '<hr>';
     return $arr_com;
 	//func
 	}
