@@ -42,7 +42,6 @@ require_once 'showPicture.php';
 
 /*
  * ページを構成する
- *
  */
 class UniteAsOne {
 
@@ -75,6 +74,18 @@ class UniteAsOne {
     $drawHere = new CreatePicture;
     $drawHere->showMain($temp);
 
+    // MySQLに対する処理
+    try{
+    	$dbTake = new DbClass;
+    	$arr_comment = $dbTake->dbGet();
+    }
+    catch(Exception $e){
+    	echo '<hr>';
+    	print $e->getMessage();
+    	echo '<hr>';
+    }
+
+    date_default_timezone_set('Asia/Tokyo');
 
     echo <<< EOM
 <!-- IINE ! -->
@@ -82,24 +93,13 @@ class UniteAsOne {
 <div style='font-size:22pt;float:left;text-align:left;margin-left:50px;'>いいね ！
 EOM;
 
-    // MySQLに対する処理
-try{
-	$dbTake = new DbClass;
-	$arr_comment = $dbTake->dbGet();
-}
-catch(Exception $e){
-	echo '<hr>';
-	print $e->getMessage();
-	echo '<hr>';
-}
-    echo count($arr_comment);
+echo count($arr_comment);
 
 echo <<< EOM
 件</div>
 <div style='font-size:20pt;text-align:right;margin-right:50px;'>
 EOM;
 
-date_default_timezone_set('Asia/Tokyo');
 echo date( "H", getlastmod() );
 
 echo <<< EOM
@@ -108,24 +108,10 @@ echo <<< EOM
 <div style='clear:both;'></div>
 EOM;
 
-//    print_r($arr_comment).'<hr>';
-
-    //print $arr_comment[0]['id'].'<hr>';
-    //print $arr_comment[0]['iid'].'<hr>';
-    //print $arr_comment[0]['cowner'].'<hr>';
-	//print $arr_comment[0]['cline'].'<hr>';
-
     // コメント
     $show_name = new Comment\showComment();
     //$show_name->showList($comm_arr);
     $show_name->showList($arr_comment);
-
-//$comm_head = "<div style='margin-left:50px;'><div style='font-size:22pt;text-align:left;margin-bottom:20px;><span style='margin-left:20px;'><b>";
-//$comm_mid = "</b> </span><span style='margin-left:20px;'>";
-//$comm_tail = "</span></div></div>";
-//foreach($comm_arr as $speaker_key => $comm_val){
-//    echo $comm_head.$speaker_key.$comm_mid.$comm_val.$comm_tail;
-//};
 
     //注意
     $getAttention = new CreatePage;
