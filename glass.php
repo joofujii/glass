@@ -7,7 +7,13 @@ error_reporting(-1);
 //UniteAsOne/uniteParts
 
 //ページを作成すること
-//CreatePage/showHeader/showTop/showBlack/showWhite/showFooter
+//CreatePage/showHeader,showTop,showBlack,showWhite
+//CreatePicture/showMain($temp)
+//DbClass/dbGet()
+//Comment\showComment()/showList($arr_comment);
+//CreatePage/showAttention();
+
+//CreatePage/showFooter
 
 //画像を選んで表示すること
 //CreatePicture/showMain
@@ -51,7 +57,7 @@ class UniteAsOne {
      * @param 画像名称
      *
      */
-    public function uniteParts($spk, $pictName){
+    public function uniteParts($pictName){
 
     //ヘッダー
     $getHeader = new CreatePage;
@@ -66,6 +72,7 @@ class UniteAsOne {
     $getBlack->showBlack();
 
     //白帯
+    $spk = '11';
     $getWhite = new CreatePage;
     $getWhite->showWhite($spk);
 
@@ -134,15 +141,17 @@ EOM;
 
 // *************************
 
-$speaker = isset($_GET['s']) ? $_GET['s'] : null ;
+//$speaker = isset($_GET['s']) ? $_GET['s'] : null ;
 $pict_name = isset($_GET['q']) ? $_GET['q'] : null ;
     //print "input_modo=GET ".$input_mode;
 
-if(($speaker == null) || ($pict_name == null) ){
+//if(($speaker == null) || ($pict_name == null) ){
+if($pict_name == null ){
     print '正しいページよりご覧ください。';
 }
 else{
     $instantGlass = new UniteAsOne();
-    $instantGlass->uniteParts($speaker, $pict_name);
+//    $instantGlass->uniteParts($speaker, $pict_name);
+    $instantGlass->uniteParts($pict_name);
 }
 ?>

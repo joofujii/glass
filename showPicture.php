@@ -11,7 +11,11 @@ class CreatePicture {
 <table cellpadding=0 bgcolor=#FFFFFF width=100% border=0>
 <tr>
 <td align=center bgcolor=#FFFFFF>
-<img src='./files/jyo2field.jpg' width=100%>
+EOM;
+
+echo "<img src='./files/beer.jpg'' width=100%>";
+
+    echo <<< EOM
 </td>
 </tr>
 </table>
