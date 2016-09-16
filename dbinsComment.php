@@ -7,13 +7,15 @@ $link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi'
  if (!$link) {
  die('接続失敗です。'.mysql_error());
 }
-$db_selected = mysql_select_db('researchstudent_ci', $link);
+//$db_selected = mysql_select_db('researchstudent_ci', $link);
+$db_selected = mysql_select_db('researchstudent_glass', $link);
 if (!$db_selected){
     die('データベース選択失敗です。'.mysql_error());
 }
 //print('<p>データベースを選択しました。</p>');
 mysql_set_charset('utf8');
-$result = mysql_query('SELECT id,iid,cline,cowner FROM comment');
+//$result = mysql_query('SELECT id,iid,cline,cowner FROM comment');
+$result = mysql_query('SELECT id,pid,comment,writer FROM comm');
 if (!$result) {
 	die('SELECTクエリーが失敗しました。'.mysql_error());
 }
@@ -36,7 +38,8 @@ if ($ccomment == 'こう思った'){
 	echo '<a href="#" onClick="window.close(); return false;">CLOSE</a>';
 }
 else{
-	$sql = "INSERT INTO comment (iid,cline,cowner) VALUES (2, '$ccomment', '$cowner')";
+	//$sql = "INSERT INTO comment (iid,cline,cowner) VALUES (2, '$ccomment', '$cowner')";
+	$sql = "INSERT INTO comm (pid,comment,writer) VALUES (2, '$ccomment', '$cowner')";
 	//echo '<hr>' . $sql . '<hr>';
 
 	$result_flag = mysql_query($sql);

@@ -11,12 +11,14 @@ class DbClass{
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db('researchstudent_ci', $link);
+		//$db_selected = mysql_select_db('researchstudent_ci', $link);
+		$db_selected = mysql_select_db('researchstudent_glass', $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
 		mysql_set_charset('utf8');
-		$result = mysql_query('SELECT * FROM comment');
+		//$result = mysql_query('SELECT * FROM comment');
+		$result = mysql_query('SELECT * FROM comm');
 		if (!$result) {
 			die('クエリーが失敗しました。'.mysql_error());
 		}
@@ -24,7 +26,7 @@ class DbClass{
         $arr_com = array();
 		while($row = mysql_fetch_assoc($result)){
 			//$row = mysql_fetch_assoc($result);
-			if ($row['cowner'] == 'XXX') {
+			if ($row['writer'] == 'XXX') {
 				throw new Exception ('「Exceptionって知ってる？<br>知らないよね。<br>じゃあいいや、気にしないでねｗ」');
 			}
             //TODO
