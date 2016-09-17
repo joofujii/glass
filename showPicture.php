@@ -5,18 +5,25 @@
 class CreatePicture {
 
     //
-    public function showMain($comm_arr){
+    public function showMain($pict_id){
 
     echo <<< EOM
 <table cellpadding=0 bgcolor=#FFFFFF width=100% border=0>
 <tr>
-<td align=center bgcolor=#FFFFFF>
+<td align=center bgcolor=#FFFFFF><img src='./files/
 EOM;
 
-echo "<img src='./files/beer.jpg'' width=100%>";
+    //picture id の画像指定（ページ指定）を持ってくる。
+// $pname= DB(pid = $pict_id)
+//このクラスはどこに入れるか？
+
+// $pict_name = $pname;
+// echo "$pname";
+
+    echo "shimokita";
 
     echo <<< EOM
-</td>
+.jpg'' width=100%></td>
 </tr>
 </table>
 EOM;
