@@ -42,5 +42,35 @@ class DbClass{
     return $arr_com;
 	//func
 	}
+
+	public function imageGet($id){
+		// MySQLに対する処理
+		$link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi');
+		if (!$link) {
+			die('接続失敗です。'.mysql_error());
+		}
+		//$db_selected = mysql_select_db('researchstudent_ci', $link);
+		$db_selected = mysql_select_db('researchstudent_glass', $link);
+		if (!$db_selected){
+			die('データベース選択失敗です。'.mysql_error());
+		}
+		mysql_set_charset('utf8');
+		//$result = mysql_query('SELECT * FROM comment');
+		$result = mysql_query("SELECT pname FROM pict WHERE id = $id");
+		if (!$result) {
+			die('クエリーが失敗しました。'.mysql_error());
+		}
+		mysql_close($link);
+        $arr_com = array();
+		while($row = mysql_fetch_assoc($result)){
+			//if ($row['pname'] == 'XXX') {
+			//	throw new Exception ('「Exceptionって知ってる？<br>知らないよね。<br>じゃあいいや、気にしないでねｗ」');
+			//}
+			$arr_com[ ] = $row;
+		}
+        //print_r($arr_com);
+		return $arr_com[0]['pname'];
+    //func
+	}
 //class
 }

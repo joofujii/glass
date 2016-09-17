@@ -5,7 +5,7 @@
 class CreatePicture {
 
     //
-    public function showMain($pict_id){
+    public function showMain($imageName){
 
     echo <<< EOM
 <table cellpadding=0 bgcolor=#FFFFFF width=100% border=0>
@@ -18,9 +18,9 @@ EOM;
 //このクラスはどこに入れるか？
 
 // $pict_name = $pname;
-// echo "$pname";
+ echo $imageName;
 
-    echo "shimokita";
+//    echo "shimokita";
 
     echo <<< EOM
 .jpg'' width=100%></td>

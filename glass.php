@@ -76,10 +76,15 @@ class UniteAsOne {
     $getWhite = new CreatePage;
     $getWhite->showWhite($spk);
 
+    //メイン画像名
+    $url = $pictName;
+    $drawHere = new DbClass;
+    $imageName = $drawHere->imageGet($url);
+
     //メイン画像
     $temp = 1;
     $drawHere = new CreatePicture;
-    $drawHere->showMain($temp);
+    $drawHere->showMain($imageName);
 
     // MySQLに対する処理
     try{
