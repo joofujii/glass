@@ -32,14 +32,18 @@ if (!$result) {
 $cowner = $_POST['take_owner'];
 $ccomment = $_POST['take_comment'];
 
+//TODO
+$gid = $_POST['glass'];
+echo 'glass='.$gid.'=';
+
 if ($ccomment == 'こう思った'){
-//	die('コメントが書いてなかったですっ！'.mysql_error());
-	echo 'コメントが書いてなかったですっ！<br><br><br><br>';
+//	die('<br>コメントが書いてなかったですっ！'.mysql_error());
+	echo '<br>コメントが書いてなかったですっ！<br><br><br><br>';
 	echo '<a href="#" onClick="window.close(); return false;">CLOSE</a>';
 }
 else{
 	//$sql = "INSERT INTO comment (iid,cline,cowner) VALUES (2, '$ccomment', '$cowner')";
-	$sql = "INSERT INTO comm (pid,comment,writer) VALUES (2, '$ccomment', '$cowner')";
+	$sql = "INSERT INTO comm (pid,comment,writer) VALUES ('$gid', '$ccomment', '$cowner')";
 	//echo '<hr>' . $sql . '<hr>';
 
 	$result_flag = mysql_query($sql);

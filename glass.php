@@ -29,8 +29,11 @@ error_reporting(-1);
 //InviteComment/receiveComment(db)
 //showForm,receiveForm,
 //JavaScriptで飛ばす先のform
-//inputComment.html
 
+//inputComment.html
+//コメントフォーム
+//dbinsComment.php
+//フォーム受け取り
 //その他の機能を適切に実装すること
 //Utility/
 
@@ -76,15 +79,10 @@ class UniteAsOne {
     $getWhite = new CreatePage;
     $getWhite->showWhite($spk);
 
-    //メイン画像名
-    $url = $pictName;
-    $drawHere = new DbClass;
-    $imageName = $drawHere->imageGet($url);
-
     //メイン画像
     $temp = 1;
     $drawHere = new CreatePicture;
-    $drawHere->showMain($imageName);
+    $drawHere->showMain($temp);
 
     // MySQLに対する処理
     try{

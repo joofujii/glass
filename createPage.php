@@ -34,11 +34,16 @@ echo <<< EOM
 <script language="javascript">
 <!--
 function openwin(){
-win=window.open("inputComment.html","new","toolbar=yes,width=400,height=400");
+win=window.open("inputComment.html","new","toolbar=yes,width=400,height=400",
+"subWin.getElementById('glassid').innerHTML='3' ");
 }
 // -->
 </script>
 EOM;
+//TODO
+//"subWin.document.comm_form.glass.value='2' ");
+//subWin.document.getElementById("ichi").innerHTML="
+
     }
 
     /*
