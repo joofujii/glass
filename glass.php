@@ -80,9 +80,9 @@ class UniteAsOne {
     $getWhite->showWhite($spk);
 
     //メイン画像
-    $temp = 1;
+    //$temp = 'bay';
     $drawHere = new CreatePicture;
-    $drawHere->showMain($temp);
+    $drawHere->showMain($pictName);
 
     // MySQLに対する処理
     try{
