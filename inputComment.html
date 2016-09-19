@@ -1,4 +1,15 @@
-<form action="dbinsComment.php" method="POST" name="comm_form">
+<!DOCTYPE html> <html>
+<body>
+<script>
+pid = location.search;
+pid = pid.substring(3 ,pid.length);
+document.write('<form action="dbinsComment.php" method="POST" name="myForm">');
+document.write('<input name="glass" value="');
+document.write(pid);
+document.write('" type="hidden">');
+
+</script>
+
 <p style="font-size:30pt">
 いいでしょ？どう思う？
 <input type="text" name="take_comment" value="こう思った">
@@ -12,7 +23,7 @@
 <OPTION value="わい">わい</OPTION>
 <OPTION value="小生">小生</OPTION>
 </SELECT>
-<input type="hidden" id="glassid" name="glass" value="">
 <input type="submit"value="送信">
 </div>
 </form>
+ </body> </html>

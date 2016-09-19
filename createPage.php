@@ -27,20 +27,23 @@ class CreatePage {
     public function showHeader(){
 
     //$input_width = 200;
+    $pid = 1;
 
 echo <<< EOM
 <head><meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<meta charset='utf-8'><title>.......</title></head>
+<meta charset='utf-8'><title>.......</title>
+
 <script language="javascript">
-<!--
-function openwin(){
-win=window.open("inputComment.html","new","toolbar=yes,width=400,height=400",
-"subWin.getElementById('glassid').innerHTML='3' ");
+var s=$pid;
+function openWin(){
+window.open("./inputComment.html?s=" +s);
 }
-// -->
 </script>
+</head>
 EOM;
+
 //TODO
+//"subWin.getElementById('glassid').innerHTML='3' ");
 //"subWin.document.comm_form.glass.value='2' ");
 //subWin.document.getElementById("ichi").innerHTML="
 
@@ -234,7 +237,7 @@ catch(Exception $e){
 <hr style='clear:both;'>
 </div>
 <div style='font-size:22pt;margin-left:50px;margin-bottom:22pt;margin-bottom:22pt'>
-ログインしても「いいね！」や<a href="javascript:openwin()">コメント</a>はできません。
+ログインしても「いいね！」や<a href="javascript:openWin()">コメント</a>はできません。
 </div>
 EOM;
         }
