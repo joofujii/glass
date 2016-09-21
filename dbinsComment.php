@@ -35,11 +35,23 @@ $ccomment = $_POST['take_comment'];
 //TODO
 $gid = $_POST['glass'];
 echo 'glass='.$gid.'=';
+echo '<div style="font-size:30pt">';
 
-if ($ccomment == 'こう思った'){
+if ($ccomment == 'いいね'){
 //	die('<br>コメントが書いてなかったですっ！'.mysql_error());
-	echo '<br>コメントが書いてなかったですっ！<br><br><br><br>';
+//	echo '<br>「いいね」だったので、いいねしときます！<br><br><br><br>';
+	echo '<br><br>コメントが書いてなかったですっ！<br><br><br><br>';
+
+
+//	$sql = "INSERT INTO iine (pid,comment,writer) VALUES ('$gid', '$ccomment', '$cowner')";
+	//echo '<hr>' . $sql . '<hr>';
+
+//	$result_flag = mysql_query($sql);
+//	if (!$result_flag) { die('INSERTクエリーが失敗しました。'.mysql_error()); }
+
+
 	echo '<a href="#" onClick="window.close(); return false;">CLOSE</a>';
+echo '</div>';
 }
 else{
 	//$sql = "INSERT INTO comment (iid,cline,cowner) VALUES (2, '$ccomment', '$cowner')";
@@ -51,8 +63,10 @@ else{
 	//print('<p>追加後のデータを取得します。</p>');
 	echo '書いたよ<br><br>リロードしてみて<br><br><br><br>';
 	echo '<a href="#" onClick="window.close(); return false;">CLOSE</a>';
+echo '</div>';
 
 }
+
 //$result = mysql_query('SELECT id,iid,cline,cowner FROM comment');
 //if (!$result) {
 //	die('SELECTクエリーが失敗しました。'.mysql_error());

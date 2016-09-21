@@ -82,6 +82,7 @@ class UniteAsOne {
     //urlから画像名
     	$pnameTake = new DbClass;
     	$pictName = $pnameTake->pnameGet($url);
+    	$gid = $pnameTake->gidGet($url);
 
     //メイン画像
     //$temp = 'bay';
@@ -91,7 +92,7 @@ class UniteAsOne {
     // MySQLに対する処理
     try{
     	$dbTake = new DbClass;
-    	$arr_comment = $dbTake->dbGet();
+    	$arr_comment = $dbTake->dbGet($gid);
     }
     catch(Exception $e){
     	echo '<hr>';
@@ -149,8 +150,8 @@ EOM;
 // *************************
 
 //$speaker = isset($_GET['s']) ? $_GET['s'] : null ;
-$pict_name = isset($_GET['q']) ? $_GET['q'] : null ;
-    //print "input_modo=GET ".$input_mode;
+//$pict_name = isset($_GET['q']) ? $_GET['q'] : null ;
+$pict_name = isset($_GET['_']) ? $_GET['_'] : null ;
 
 //if(($speaker == null) || ($pict_name == null) ){
 if($pict_name == null ){
