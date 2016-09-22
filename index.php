@@ -55,16 +55,21 @@ require_once 'showPicture.php';
 class UniteAsOne {
 
     /*
-     * ページの表示
+     * SPページの表示
      * @param コメント者名
      * @param 画像名称
      *
      */
     public function uniteParts($url){
 
+    //urlから画像名
+    	$pnameTake = new DbClass;
+    	$pictName = $pnameTake->pnameGet($url);
+    	$gid = $pnameTake->gidGet($url);
+
     //ヘッダー
     $getHeader = new CreatePage;
-    $getHeader->showHeader();
+    $getHeader->showHeader($gid);
 
     //トップ
     $getTop = new CreatePage;
@@ -78,11 +83,6 @@ class UniteAsOne {
     $spk = '11';
     $getWhite = new CreatePage;
     $getWhite->showWhite($spk);
-
-    //urlから画像名
-    	$pnameTake = new DbClass;
-    	$pictName = $pnameTake->pnameGet($url);
-    	$gid = $pnameTake->gidGet($url);
 
     //メイン画像
     //$temp = 'bay';
@@ -144,10 +144,44 @@ EOM;
 
     }
     // function end
+
+/*
+* SPページの表示
+* @param コメント者名
+* @param 画像名称
+*
+*/
+public function unitePcParts($url){
+
+	//urlから画像名
+	$pnameTake = new DbClass;
+	$pictName = $pnameTake->pnameGet($url);
+	$gid = $pnameTake->gidGet($url);
+
+	//ヘッダー
+	$getHeader = new CreatePage;
+	$getHeader->showHeader($gid);
+	//トップ
+	$getTop = new CreatePage;
+	$getTop->showPcTop();
+
+    }
+	// function end
 }
 // class end
 
 // *************************
+
+$ua=$_SERVER['HTTP_USER_AGENT'];
+//if((strpos($ua,’iPhone’)==false)&&(strpos($ua,’iPod’)==false)&&(strpos($ua,’Android’)==false)){
+//header("Location: ./p/index.html");
+//exit();
+//}
+
+//if PC
+//if((strpos($ua,’iPhone’)!==false)||(strpos($ua,’iPod’)!==false)||(strpos($ua,’Android’)!==false)){
+//if SP
+//if((strpos($ua,’iPhone’)==false)&&(strpos($ua,’iPod’)==false)&&(strpos($ua,’Android’)==false)){
 
 //$speaker = isset($_GET['s']) ? $_GET['s'] : null ;
 //$pict_name = isset($_GET['q']) ? $_GET['q'] : null ;
@@ -158,8 +192,16 @@ if($pict_name == null ){
     print '正しいページよりご覧ください。';
 }
 else{
-    $instantGlass = new UniteAsOne();
-//    $instantGlass->uniteParts($speaker, $pict_name);
-    $instantGlass->uniteParts($pict_name);
+    $ua=$_SERVER['HTTP_USER_AGENT'];
+//    echo $ua;
+    if((strpos($ua,'iPhone')!==false)||(strpos($ua,'iPod')!==false)||(strpos($ua,'Android')!==false)){
+        //for SP
+        $instantGlass = new UniteAsOne();
+        $instantGlass->uniteParts($pict_name);
+    }else{
+        //for PC
+        $instantGlass = new UniteAsOne();
+        $instantGlass->unitePcParts($pict_name);
+    }
 }
 ?>
