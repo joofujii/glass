@@ -24,10 +24,10 @@ class CreatePage {
      * @param 画像名称
      *
      */
-    public function showHeader(){
+    public function showHeader($pid){
 
     //$input_width = 200;
-    $pid = 1;
+    //$pid = 1;
 
 echo <<< EOM
 <head><meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -292,6 +292,30 @@ $date_foot->closeColor();//trait
 <br>
 </body>
 </html>
+EOM;
+    }
+    // function end
+
+    /*
+     * ページの表示
+    * @param コメント者名
+    * @param 画像名称
+    *
+    */
+    public function showPcTop(){
+
+    	echo <<< EOM
+<body bgcolor=#FFFFFF>
+<table cellpadding=0 bgcolor=#FFFFFF  width=100% height=150>
+<tr><td align=left>
+    </td>
+<td align=center style='font-style:italic; color:#808080; font-size:16pt'>
+    </font></td>
+<td align=right>
+    			"ごめん！PC版まだなんだｗ"
+    			</td>
+</tr>
+</table>
 EOM;
     }
     // function end

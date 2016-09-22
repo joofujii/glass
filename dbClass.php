@@ -19,7 +19,7 @@ class DbClass{
 		mysql_set_charset('utf8');
 		//$result = mysql_query('SELECT * FROM comment');
 		//$result = mysql_query('SELECT * FROM comm');
-		$result = mysql_query('SELECT * FROM comm WHERE gid ="'.$gid.'"');
+		$result = mysql_query('SELECT * FROM comm WHERE pid ="'.$gid.'"');
 		if (!$result) {
 			die('dbGetクエリーが失敗しました。'.mysql_error());
 		}
