@@ -163,7 +163,7 @@ public function unitePcParts($url){
 	$getHeader->showHeader($gid);
 	//トップ
 	$getTop = new CreatePage;
-	$getTop->showPcTop();
+	$getTop->showPcTop($pictName);
 
     }
 	// function end

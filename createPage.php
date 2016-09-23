@@ -302,20 +302,28 @@ EOM;
     * @param 画像名称
     *
     */
-    public function showPcTop(){
+    public function showPcTop($pic){
 
-    	echo <<< EOM
+echo <<< EOM
 <body bgcolor=#FFFFFF>
-<table cellpadding=0 bgcolor=#FFFFFF  width=100% height=150>
-<tr><td align=left>
-    </td>
-<td align=center style='font-style:italic; color:#808080; font-size:16pt'>
-    </font></td>
-<td align=right>
-    			"ごめん！PC版まだなんだｗ"
-    			</td>
-</tr>
-</table>
+ "ごめん！PC版まだなんだｗ"
+ <div >
+    <div style="    filter:alpha(opacity=30);
+    -moz-opacity: 0.3;
+    opacity: 0.3;
+  transform: rotate(-10deg);
+  -ms-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -webkit-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
+ 			" >
+<img src="./files/
+EOM;
+echo $pic;
+echo <<< EOM
+.jpg" width=100px>
+    </div>
+</div>
 EOM;
     }
     // function end
