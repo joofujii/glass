@@ -63,9 +63,9 @@ class UniteAsOne {
     public function uniteParts($url){
 
     //urlから画像名
-    	$pnameTake = new DbClass;
-    	$pictName = $pnameTake->pnameGet($url);
-    	$gid = $pnameTake->gidGet($url);
+    $pnameTake = new DbClass;
+    $pictName = $pnameTake->pnameGet($url);
+    $gid = $pnameTake->gidGet($url);
 
     //ヘッダー
     $getHeader = new CreatePage;
@@ -88,6 +88,10 @@ class UniteAsOne {
     //$temp = 'bay';
     $drawHere = new CreatePicture;
     $drawHere->showMain($pictName);
+
+    // カウントと時間
+    //$show_current = new TimeCount();
+    //$show_current->showNow($gid);
 
     // MySQLに対する処理
     try{
@@ -125,7 +129,6 @@ EOM;
 
     // コメント
     $show_name = new Comment\showComment();
-    //$show_name->showList($comm_arr);
     $show_name->showList($arr_comment);
 
     //注意
@@ -145,26 +148,23 @@ EOM;
     }
     // function end
 
-/*
-* SPページの表示
-* @param コメント者名
-* @param 画像名称
-*
-*/
-public function unitePcParts($url){
-
-	//urlから画像名
-	$pnameTake = new DbClass;
-	$pictName = $pnameTake->pnameGet($url);
-	$gid = $pnameTake->gidGet($url);
-
-	//ヘッダー
-	$getHeader = new CreatePage;
-	$getHeader->showHeader($gid);
-	//トップ
-	$getTop = new CreatePage;
-	$getTop->showPcTop($pictName);
-
+    /*
+    * PCページの表示(工事中)
+    * @param コメント者名
+    * @param 画像名称
+    *
+    */
+    public function unitePcParts($url){
+    //urlから画像名
+    $pnameTake = new DbClass;
+    $pictName = $pnameTake->pnameGet($url);
+    $gid = $pnameTake->gidGet($url);
+    //ヘッダー
+    $getHeader = new CreatePage;
+    $getHeader->showHeader($gid);
+    //PCトップ
+    $getTop = new CreatePage;
+    $getTop->showPcTop($pictName);
     }
 	// function end
 }
@@ -173,10 +173,6 @@ public function unitePcParts($url){
 // *************************
 
 $ua=$_SERVER['HTTP_USER_AGENT'];
-//if((strpos($ua,’iPhone’)==false)&&(strpos($ua,’iPod’)==false)&&(strpos($ua,’Android’)==false)){
-//header("Location: ./p/index.html");
-//exit();
-//}
 
 //if PC
 //if((strpos($ua,’iPhone’)!==false)||(strpos($ua,’iPod’)!==false)||(strpos($ua,’Android’)!==false)){
@@ -187,13 +183,11 @@ $ua=$_SERVER['HTTP_USER_AGENT'];
 //$pict_name = isset($_GET['q']) ? $_GET['q'] : null ;
 $pict_name = isset($_GET['_']) ? $_GET['_'] : null ;
 
-//if(($speaker == null) || ($pict_name == null) ){
 if($pict_name == null ){
     print '正しいページよりご覧ください。';
 }
 else{
     $ua=$_SERVER['HTTP_USER_AGENT'];
-//    echo $ua;
     if((strpos($ua,'iPhone')!==false)||(strpos($ua,'iPod')!==false)||(strpos($ua,'Android')!==false)){
         //for SP
         $instantGlass = new UniteAsOne();
@@ -201,7 +195,10 @@ else{
     }else{
         //for PC
         $instantGlass = new UniteAsOne();
-        $instantGlass->unitePcParts($pict_name);
+        //$instantGlass->unitePcParts($pict_name);
+
+        //for TEST
+        $instantGlass->uniteParts($pict_name);
     }
 }
 ?>
