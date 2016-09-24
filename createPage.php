@@ -109,10 +109,21 @@ EOM;
      */
     public function showWhite($spk){
 
-    echo <<< EOM
-    <!-- WHITE PERSON -->
+echo <<< EOM
+<!-- WHITE PERSON -->
 <table cellpadding=0 bgcolor=#FFFFFF  width=100% height=250px border=0>
-<tr><td align=left><a href='javascript:alert("ここがhomeです。")' style='margin-left:20px;color:#446699; text-decoration: none;'><img src='../i/files/hallo_trim.jpg' width=75></a><span style='font-style:italic; color:#000000; font-size:20pt; margin-left:20px;vertical-align:top;'>
+<tr><td align=left>
+<a href='javascript:alert("ここがhomeです。")' style='margin-left:20px;color:#446699; text-decoration: none;'>
+EOM;
+
+//Speaker
+//    $showOwner = new Speaker\Show();
+//    $showOwner->showOwner($spk);
+echo '<img src="./mark/fox.jpg" width=75>';
+
+echo <<< EOM
+</a>
+<span style='font-style:italic; color:#000000; font-size:20pt; margin-left:20px;vertical-align:top;'>
 EOM;
 
 //Speaker
@@ -124,7 +135,7 @@ EOM;
 //        echo 'Unknown';
 //    }
 
-    echo <<< EOM
+echo <<< EOM
 </span></td>
 <td align=left style='font-style:italic; color:#000000; font-size:20pt'></font></td>
 <td align=right>
