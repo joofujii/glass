@@ -56,97 +56,56 @@ class UniteAsOne {
 
     /*
      * SPページの表示
-     * @param コメント者名
-     * @param 画像名称
      *
+     * @param URLクエリ名
+     *
+     * @output ページ表示
      */
-    public function uniteParts($url){
+    public function uniteSpParts($url){
 
-    //urlから画像名
-    $pnameTake = new DbClass;
-    $pictName = $pnameTake->pnameGet($url);
-    $gid = $pnameTake->gidGet($url);
+        //urlから画像名
+        $pnameTake = new DbClass;
+        $pictName = $pnameTake->pnameGet($url);
+        $gid = $pnameTake->gidGet($url);
 
-    //ヘッダー
-    $getHeader = new CreatePage;
-    $getHeader->showHeader($gid);
+        //ヘッダー
+        $getHeader = new CreatePage;
+        $getHeader->showHeader($gid);
 
-    //トップ
-    $getTop = new CreatePage;
-    $getTop->showTop();
+        //トップ
+        $getTop = new CreatePage;
+        $getTop->showTop();
 
-    //黒帯
-    $getBlack = new CreatePage;
-    $getBlack->showBlack();
+        //黒帯
+        $getBlack = new CreatePage;
+        $getBlack->showBlack();
 
-    //白帯
-    $spk = '11';
-    $getWhite = new CreatePage;
-    $getWhite->showWhite($spk);
+        //白帯
+        $spk = '11';
+        $getWhite = new CreatePage;
+        $getWhite->showWhite($spk);
 
-    //メイン画像
-    //$temp = 'bay';
-    $drawHere = new CreatePicture;
-    $drawHere->showMain($pictName);
+        //メイン画像
+        $drawHere = new CreatePicture;
+        $drawHere->showMain($pictName);
 
-    // カウントと時間
-    //$show_current = new TimeCount();
-    //$show_current->showNow($gid);
+        // カウントと時間
+        $showCurrent = new CreatePage();
+        $arr_comment = $showCurrent->showNow($gid);
 
-    // MySQLに対する処理
-    try{
-    	$dbTake = new DbClass;
-    	$arr_comment = $dbTake->dbGet($gid);
-    }
-    catch(Exception $e){
-    	echo '<hr>';
-    	print $e->getMessage();
-    	echo '<hr>';
-    }
+        // コメント一覧
+        $showName = new Comment\showComment();
+        $showName->showList($arr_comment);
 
-    date_default_timezone_set('Asia/Tokyo');
+        //注意書き
+        $getAttention = new CreatePage;
+        $getAttention->showAttention();
 
-    echo <<< EOM
-<!-- IINE ! -->
-<div style='margin-top:20px;margin-bottom:20px;'>
-<div style='font-size:22pt;float:left;text-align:left;margin-left:50px;'>いいね ！
-EOM;
-
-echo count($arr_comment);
-
-echo <<< EOM
-件</div>
-<div style='font-size:20pt;text-align:right;margin-right:50px;'>
-EOM;
-
-echo date( "H", getlastmod() );
-
-echo <<< EOM
-時間前</div>
-</div>
-<div style='clear:both;'></div>
-EOM;
-
-    // コメント
-    $show_name = new Comment\showComment();
-    $show_name->showList($arr_comment);
-
-    //注意
-    $getAttention = new CreatePage;
-    $getAttention->showAttention();
-
-    //フッター
-    $getFooter = new CreatePage;
-    $getFooter->showFooter();
-
-    echo <<< EOM
-<br>
-</body>
-</html>
-EOM;
-
-    }
-    // function end
+        //フッター
+        $getFooter = new CreatePage;
+        $getFooter->showFooter();
+        }
+        // function end
 
     /*
     * PCページの表示(工事中)
@@ -155,35 +114,31 @@ EOM;
     *
     */
     public function unitePcParts($url){
-    //urlから画像名
-    $pnameTake = new DbClass;
-    $pictName = $pnameTake->pnameGet($url);
-    $gid = $pnameTake->gidGet($url);
-    //ヘッダー
-    $getHeader = new CreatePage;
-    $getHeader->showHeader($gid);
-    //PCトップ
-    $getTop = new CreatePage;
-    $getTop->showPcTop($pictName);
+        //urlから画像名
+        $pnameTake = new DbClass;
+        $pictName = $pnameTake->pnameGet($url);
+        $gid = $pnameTake->gidGet($url);
+        //ヘッダー
+        $getHeader = new CreatePage;
+        $getHeader->showHeader($gid);
+        //PCトップ
+        $getTop = new CreatePage;
+        $getTop->showPcTop($pictName);
     }
 	// function end
 }
 // class end
 
-// *************************
+// *********** Main **************
 
 $ua=$_SERVER['HTTP_USER_AGENT'];
 
 //if PC
 //if((strpos($ua,’iPhone’)!==false)||(strpos($ua,’iPod’)!==false)||(strpos($ua,’Android’)!==false)){
-//if SP
-//if((strpos($ua,’iPhone’)==false)&&(strpos($ua,’iPod’)==false)&&(strpos($ua,’Android’)==false)){
-
-//$speaker = isset($_GET['s']) ? $_GET['s'] : null ;
 //$pict_name = isset($_GET['q']) ? $_GET['q'] : null ;
-$pict_name = isset($_GET['_']) ? $_GET['_'] : null ;
 
-if($pict_name == null ){
+$url_name = isset($_GET['_']) ? $_GET['_'] : null ;
+if($url_name == null ){
     print '正しいページよりご覧ください。';
 }
 else{
@@ -191,14 +146,14 @@ else{
     if((strpos($ua,'iPhone')!==false)||(strpos($ua,'iPod')!==false)||(strpos($ua,'Android')!==false)){
         //for SP
         $instantGlass = new UniteAsOne();
-        $instantGlass->uniteParts($pict_name);
+        $instantGlass->uniteSpParts($url_name);
     }else{
         //for PC
         $instantGlass = new UniteAsOne();
-        //$instantGlass->unitePcParts($pict_name);
+        //$instantGlass->unitePcParts($url_name);
 
         //for TEST
-        $instantGlass->uniteParts($pict_name);
+        $instantGlass->uniteSpParts($url_name);
     }
 }
 ?>

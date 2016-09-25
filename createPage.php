@@ -88,7 +88,7 @@ EOM;
     <!-- BLACK head -->
 <table cellpadding=10 bgcolor=#000000 width=100% border=0 height=150>
 <tr><td align=left><a href='javascript:alert("ここがhomeです。")' style='color:#446699; text-decoration: none;'></a></td>
-<td align=left style='font-style:italic; color:white; font-size:14pt; margin-top:20px;'>Instagrass<br>GeeglePlayとは関係ありません。</font></td>
+<td align=left style='font-style:italic; color:white; font-size:22pt; margin-top:20px;'>Instaglass<br>GeeglePlayとは関係ありません。</font></td>
 <td align=right>
 <table cellpadding=3 style='border: 1px #FFFFFF solid; '>
 <tr><td>
@@ -151,31 +151,36 @@ EOM;
     }
 
     /*
-     * ページの表示
-     * @param コメント者名
-     * @param 画像名称
+     * 中央部（メイン画像）の表示
+     * @param $comm_arr(コメント内容配列)
+     * @param
      *
      */
-    public function showMiddle(){
+    public function showMiddle($comm_arr){
+        $temp = 1;
+        $drawHere = new CreatePicture;
+        $drawHere->showMain($temp);
+    }
 
+    /*
+     * カウントと時間の表示
+     * @param $gid(画像名）
+     *
+     */
+    public function showNow($gid){
 
-    $temp = 1;
-    $drawHere = new CreatePicture;
-    $drawHere->showMain($temp);
+        // MySQLに対する処理
+        try{
+            $dbTake = new DbClass;
+            $arr_comment = $dbTake->dbGet($gid);
+        }
+        catch(Exception $e){
+    	    echo '<hr>';
+    	    print $e->getMessage();
+    	    echo '<hr>';
+    }
 
-//<img src='../i/files/jyo2field.jpg' width=100%>
-//echo "<img src='./files/".$pictName;
-//echo "<img src='./files/jyo2field";
-
-
-    $comm_arr = [
-'7enogu_ ' => '今いちばん行きたい感じの。 ',
-'aneko.b' => ' 你太可爱了！！我爱 你！！！',
-'ae_sayaka' => ' なにこれwwwwww ',
-'omo.61pooh' => ' 何なに？www ',
-'yawelll' => ' どこでwwwww',
-'vaijjiioiw' => ' I love you ♡♡♡♡ goodnight   '
-];
+    date_default_timezone_set('Asia/Tokyo');
 
     echo <<< EOM
 <!-- IINE ! -->
@@ -183,15 +188,13 @@ EOM;
 <div style='font-size:22pt;float:left;text-align:left;margin-left:50px;'>いいね ！
 EOM;
 
-echo count($comm_arr);
+echo count($arr_comment);
 
 echo <<< EOM
 件</div>
 <div style='font-size:20pt;text-align:right;margin-right:50px;'>
 EOM;
 
-//12345
-date_default_timezone_set('Asia/Tokyo');
 echo date( "H", getlastmod() );
 
 echo <<< EOM
@@ -199,41 +202,12 @@ echo <<< EOM
 </div>
 <div style='clear:both;'></div>
 EOM;
-
-//
-//
-// MySQLに対する処理
-//
-//
-
-//Comment Table access
-try{
-	$dbTake = new DbClass;
-	$arr_comment = $dbTake->dbGet();
-}
-catch(Exception $e){
-	echo '<hr>';
-	print $e->getMessage();
-	echo '<hr>';
-}
-	print $arr_comment[0]['id'];
-//$arr_comment[0]['name']
-//$arr_comment[0]['comment']の形式で
-
-    // Comm List
-    $show_name = new Comment\showComment();
-    $show_name->showList($comm_arr);
-
-//$comm_head = "<div style='margin-left:50px;'><div style='font-size:22pt;text-align:left;margin-bottom:20px;><span style='margin-left:20px;'><b>";
-//$comm_mid = "</b> </span><span style='margin-left:20px;'>";
-//$comm_tail = "</span></div></div>";
-//foreach($comm_arr as $speaker_key => $comm_val){
-//    echo $comm_head.$speaker_key.$comm_mid.$comm_val.$comm_tail;
-//};
+    return $arr_comment;
     }
 
     /*
      * 注意の表示
+     *
      * @param コメント者名
      * @param 画像名称
      *
