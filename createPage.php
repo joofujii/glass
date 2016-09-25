@@ -24,21 +24,29 @@ class CreatePage {
      * @param 画像名称
      *
      */
-    public function showHeader(){
+    public function showHeader($pid){
 
     //$input_width = 200;
+    //$pid = 1;
 
 echo <<< EOM
 <head><meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<meta charset='utf-8'><title>.......</title></head>
+<meta charset='utf-8'><title>.......</title>
+
 <script language="javascript">
-<!--
-function openwin(){
-win=window.open("inputComment.html","new","toolbar=yes,width=400,height=400");
+var s=$pid;
+function openWin(){
+window.open("./inputComment.html?s=" +s);
 }
-// -->
 </script>
+</head>
 EOM;
+
+//TODO
+//"subWin.getElementById('glassid').innerHTML='3' ");
+//"subWin.document.comm_form.glass.value='2' ");
+//subWin.document.getElementById("ichi").innerHTML="
+
     }
 
     /*
@@ -80,7 +88,7 @@ EOM;
     <!-- BLACK head -->
 <table cellpadding=10 bgcolor=#000000 width=100% border=0 height=150>
 <tr><td align=left><a href='javascript:alert("ここがhomeです。")' style='color:#446699; text-decoration: none;'></a></td>
-<td align=left style='font-style:italic; color:white; font-size:14pt; margin-top:20px;'>Instagrass<br>GeeglePlayとは関係ありません。</font></td>
+<td align=left style='font-style:italic; color:white; font-size:22pt; margin-top:20px;'>Instaglass<br>GeeglePlayとは関係ありません。</font></td>
 <td align=right>
 <table cellpadding=3 style='border: 1px #FFFFFF solid; '>
 <tr><td>
@@ -101,10 +109,21 @@ EOM;
      */
     public function showWhite($spk){
 
-    echo <<< EOM
-    <!-- WHITE PERSON -->
+echo <<< EOM
+<!-- WHITE PERSON -->
 <table cellpadding=0 bgcolor=#FFFFFF  width=100% height=250px border=0>
-<tr><td align=left><a href='javascript:alert("ここがhomeです。")' style='margin-left:20px;color:#446699; text-decoration: none;'><img src='../i/files/hallo_trim.jpg' width=75></a><span style='font-style:italic; color:#000000; font-size:20pt; margin-left:20px;vertical-align:top;'>
+<tr><td align=left>
+<a href='javascript:alert("ここがhomeです。")' style='margin-left:20px;color:#446699; text-decoration: none;'>
+EOM;
+
+//Speaker
+//    $showOwner = new Speaker\Show();
+//    $showOwner->showOwner($spk);
+echo '<img src="./mark/fox.jpg" width=75>';
+
+echo <<< EOM
+</a>
+<span style='font-style:italic; color:#000000; font-size:20pt; margin-left:20px;vertical-align:top;'>
 EOM;
 
 //Speaker
@@ -116,7 +135,7 @@ EOM;
 //        echo 'Unknown';
 //    }
 
-    echo <<< EOM
+echo <<< EOM
 </span></td>
 <td align=left style='font-style:italic; color:#000000; font-size:20pt'></font></td>
 <td align=right>
@@ -132,31 +151,36 @@ EOM;
     }
 
     /*
-     * ページの表示
-     * @param コメント者名
-     * @param 画像名称
+     * 中央部（メイン画像）の表示
+     * @param $comm_arr(コメント内容配列)
+     * @param
      *
      */
-    public function showMiddle(){
+    public function showMiddle($comm_arr){
+        $temp = 1;
+        $drawHere = new CreatePicture;
+        $drawHere->showMain($temp);
+    }
 
+    /*
+     * カウントと時間の表示
+     * @param $gid(画像名）
+     *
+     */
+    public function showNow($gid){
 
-    $temp = 1;
-    $drawHere = new CreatePicture;
-    $drawHere->showMain($temp);
+        // MySQLに対する処理
+        try{
+            $dbTake = new DbClass;
+            $arr_comment = $dbTake->dbGet($gid);
+        }
+        catch(Exception $e){
+    	    echo '<hr>';
+    	    print $e->getMessage();
+    	    echo '<hr>';
+    }
 
-//<img src='../i/files/jyo2field.jpg' width=100%>
-//echo "<img src='./files/".$pictName;
-//echo "<img src='./files/jyo2field";
-
-
-    $comm_arr = [
-'7enogu_ ' => '今いちばん行きたい感じの。 ',
-'aneko.b' => ' 你太可爱了！！我爱 你！！！',
-'ae_sayaka' => ' なにこれwwwwww ',
-'omo.61pooh' => ' 何なに？www ',
-'yawelll' => ' どこでwwwww',
-'vaijjiioiw' => ' I love you ♡♡♡♡ goodnight   '
-];
+    date_default_timezone_set('Asia/Tokyo');
 
     echo <<< EOM
 <!-- IINE ! -->
@@ -164,15 +188,13 @@ EOM;
 <div style='font-size:22pt;float:left;text-align:left;margin-left:50px;'>いいね ！
 EOM;
 
-echo count($comm_arr);
+echo count($arr_comment);
 
 echo <<< EOM
 件</div>
 <div style='font-size:20pt;text-align:right;margin-right:50px;'>
 EOM;
 
-//12345
-date_default_timezone_set('Asia/Tokyo');
 echo date( "H", getlastmod() );
 
 echo <<< EOM
@@ -180,41 +202,12 @@ echo <<< EOM
 </div>
 <div style='clear:both;'></div>
 EOM;
-
-//
-//
-// MySQLに対する処理
-//
-//
-
-//Comment Table access
-try{
-	$dbTake = new DbClass;
-	$arr_comment = $dbTake->dbGet();
-}
-catch(Exception $e){
-	echo '<hr>';
-	print $e->getMessage();
-	echo '<hr>';
-}
-	print $arr_comment[0]['id'];
-//$arr_comment[0]['name']
-//$arr_comment[0]['comment']の形式で
-
-    // Comm List
-    $show_name = new Comment\showComment();
-    $show_name->showList($comm_arr);
-
-//$comm_head = "<div style='margin-left:50px;'><div style='font-size:22pt;text-align:left;margin-bottom:20px;><span style='margin-left:20px;'><b>";
-//$comm_mid = "</b> </span><span style='margin-left:20px;'>";
-//$comm_tail = "</span></div></div>";
-//foreach($comm_arr as $speaker_key => $comm_val){
-//    echo $comm_head.$speaker_key.$comm_mid.$comm_val.$comm_tail;
-//};
+    return $arr_comment;
     }
 
     /*
      * 注意の表示
+     *
      * @param コメント者名
      * @param 画像名称
      *
@@ -229,7 +222,7 @@ catch(Exception $e){
 <hr style='clear:both;'>
 </div>
 <div style='font-size:22pt;margin-left:50px;margin-bottom:22pt;margin-bottom:22pt'>
-ログインしても「いいね！」や<a href="javascript:openwin()">コメント</a>はできません。
+ログインしても「いいね！」や<a href="javascript:openWin()">コメント</a>はできません。
 </div>
 EOM;
         }
@@ -284,6 +277,38 @@ $date_foot->closeColor();//trait
 <br>
 </body>
 </html>
+EOM;
+    }
+    // function end
+
+    /*
+     * ページの表示
+    * @param コメント者名
+    * @param 画像名称
+    *
+    */
+    public function showPcTop($pic){
+
+echo <<< EOM
+<body bgcolor=#FFFFFF>
+ "ごめん！PC版まだなんだｗ"
+ <div >
+    <div style="    filter:alpha(opacity=30);
+    -moz-opacity: 0.3;
+    opacity: 0.3;
+  transform: rotate(-10deg);
+  -ms-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -webkit-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
+ 			" >
+<img src="./files/
+EOM;
+echo $pic;
+echo <<< EOM
+.jpg" width=100px>
+    </div>
+</div>
 EOM;
     }
     // function end

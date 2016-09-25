@@ -1,7 +1,21 @@
-<form action="dbinsComment.php" method="POST">
-<font size=5>
-いいでしょ？どう思う？
-<input type="text" name="take_comment" value="こう思った"><br>
+<!DOCTYPE html> <html>
+<body>
+<script>
+pid = location.search;
+pid = pid.substring(3 ,pid.length);
+document.write('<form action="dbinsComment.php" method="POST" name="myForm">');
+document.write('<input name="glass" value="');
+document.write(pid);
+document.write('" type="hidden">');
+
+</script>
+
+<p style="font-size:30pt">
+でも、ここからコメできるよｗ↓<br>
+<input type="text" name="take_comment" value="いいね">
+</p>
+<br>
+<div style="font-size:30pt">
 書いたのは<SELECT name="take_owner" >
 <OPTION value="わたし" selected>私</OPTION>
 <OPTION value="おれ">おれ</OPTION>
@@ -9,6 +23,9 @@
 <OPTION value="わい">わい</OPTION>
 <OPTION value="小生">小生</OPTION>
 </SELECT>
+<br>
+<br>
 <input type="submit"value="送信">
-</font>
+</div>
 </form>
+ </body> </html>

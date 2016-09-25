@@ -14,8 +14,9 @@ class showComment {
         foreach($comm_arr as $key => $comm_val){
         	//print_r($val);
             //foreach($val as $speaker_key => $comm_val){
-                echo $comm_head.$comm_val['cowner'].$comm_mid.$comm_val['cline'].$comm_tail;
-            //};
+                //echo $comm_head.$comm_val['cowner'].$comm_mid.$comm_val['cline'].$comm_tail;
+                echo $comm_head.$comm_val['writer'].$comm_mid.$comm_val['comment'].$comm_tail;
+                //};
         };
     }
 }
