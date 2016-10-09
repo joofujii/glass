@@ -8,7 +8,7 @@
 define('DB_SERVER', 'mysql475.db.sakura.ne.jp');
 define('DB_NAME', 'researchstudent');
 define('DB_SALTY', '098098poi');
-define('TB_NAME', 'researchstudent_glass');
+define('TB_NAME', 'researchstudent_sql');
 
 //echo '<hr>';
 //echo DB_SERVER;
@@ -18,7 +18,6 @@ $link = mysql_connect(DB_SERVER, DB_NAME, DB_SALTY);
  if (!$link) {
  die('接続失敗です。'.mysql_error());
 }
-//$db_selected = mysql_select_db('researchstudent_ci', $link);
 $db_selected = mysql_select_db(TB_NAME, $link);
 if (!$db_selected){
     die('データベース選択失敗です。'.mysql_error());

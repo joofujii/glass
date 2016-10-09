@@ -2,8 +2,14 @@
 ini_set( 'display_errors', "1" );
 error_reporting(-1);
 
+	//require_once('/conf/coolFactor.php');
+
+	define('DB_SERVER', 'mysql475.db.sakura.ne.jp');
+	define('DB_NAME', 'researchstudent');
+	define('DB_SALTY', '098098poi');
+	define('TB_NAME', 'researchstudent_sql');
+
 class DbClass{
-//class showPicture{
 
 	public function dbGet($gid){
 		// MySQLに対する処理
@@ -11,8 +17,7 @@ class DbClass{
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		//$db_selected = mysql_select_db('researchstudent_ci', $link);
-		$db_selected = mysql_select_db('researchstudent_glass', $link);
+		$db_selected = mysql_select_db(TB_NAME, $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
@@ -51,7 +56,7 @@ class DbClass{
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db('researchstudent_glass', $link);
+		$db_selected = mysql_select_db(TB_NAME, $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
@@ -83,7 +88,7 @@ class DbClass{
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db('researchstudent_glass', $link);
+		$db_selected = mysql_select_db(TB_NAME, $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
@@ -117,8 +122,7 @@ class DbClass{
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		//$db_selected = mysql_select_db('researchstudent_ci', $link);
-		$db_selected = mysql_select_db('researchstudent_glass', $link);
+		$db_selected = mysql_select_db(TB_NAME, $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
