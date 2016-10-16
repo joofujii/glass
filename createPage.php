@@ -32,6 +32,7 @@ class CreatePage {
 echo <<< EOM
 <head><meta http-equiv='X-UA-Compatible' content='IE=edge'>
 <meta charset='utf-8'><title>.......</title>
+<meta name="Robots" content="noindex,nofollow">
 
 <script language="javascript">
 var s=$pid;
