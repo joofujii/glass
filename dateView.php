@@ -11,7 +11,7 @@ class dateView {
      * @return date
      */
     function dateShow(){
-        echo date("Y　　mj");
+        echo date("Y　　md");
     }
 }
 

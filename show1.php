@@ -1,5 +1,6 @@
 <?php
-namespace Speaker;
+//namespace Speaker;
+namespace Speak;
 
 //include 'colorTrait.php';
 

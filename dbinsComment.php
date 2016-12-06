@@ -3,12 +3,22 @@
  <title>かきこ</title> </head>
 <body>
 <?php
-$link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi');
+//require_once('/conf/coolFactor.php');
+
+define('DB_SERVER', 'mysql475.db.sakura.ne.jp');
+define('DB_NAME', 'researchstudent');
+define('DB_SALTY', '098098poi');
+define('TB_NAME', 'researchstudent_sql');
+
+//echo '<hr>';
+//echo DB_SERVER;
+//echo '<hr>';
+
+$link = mysql_connect(DB_SERVER, DB_NAME, DB_SALTY);
  if (!$link) {
  die('接続失敗です。'.mysql_error());
 }
-//$db_selected = mysql_select_db('researchstudent_ci', $link);
-$db_selected = mysql_select_db('researchstudent_glass', $link);
+$db_selected = mysql_select_db(TB_NAME, $link);
 if (!$db_selected){
     die('データベース選択失敗です。'.mysql_error());
 }

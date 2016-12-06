@@ -1,6 +1,13 @@
 <?php
 //namespace Comment;
 
+//require_once('/conf/coolFactor.php');
+
+define('DB_SERVER', 'mysql475.db.sakura.ne.jp');
+define('DB_NAME', 'researchstudent');
+define('DB_SALTY', '098098poi');
+define('TB_NAME', 'researchstudent_sql');
+
 /*
  * コメントを受け付けて記録すること
  * @param コメント者名
@@ -9,7 +16,8 @@
  */
 class InviteComment {
 
-    /*
+
+	/*
      * コメントを受け付けること
      * @param form input
      *
@@ -40,7 +48,7 @@ EOM;
     if (!$link) {
     	die('接続失敗です。'.mysql_error());
     }
-    $db_selected = mysql_select_db('researchstudent_ci', $link);
+    $db_selected = mysql_select_db(TB_NAME, $link);
     if (!$db_selected){
     	die('データベース選択失敗です。'.mysql_error());
     }
