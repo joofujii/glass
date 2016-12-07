@@ -7,7 +7,8 @@ error_reporting(-1);
 	define('DB_SERVER', 'mysql475.db.sakura.ne.jp');
 	define('DB_NAME', 'researchstudent');
 	define('DB_SALTY', '098098poi');
-	define('TB_NAME', 'researchstudent_sql');
+//	define('TB_NAME', 'researchstudent_sql');
+	define('TB_NAME', 'researchstudent_glass');
 
   /*
    * DBに対するアクセスCLASS
