@@ -39,7 +39,8 @@ error_reporting(-1);
 
 
 //DBアクセス
-require_once '/home/researchstudent/www/sql/dbClass.php';
+//require_once '/home/researchstudent/www/sql/dbClass.php';
+require_once '/home/researchstudent/www/glass/dbClass.php';
 // Class名と member関数名が同じ2クラスを取得（但しnamespace付き）
 require_once '/home/researchstudent/www/i/show1.php';
 require_once 'show2.php';
