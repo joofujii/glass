@@ -45,16 +45,8 @@ class DbClass{
 			if ($row['writer'] == 'XXX') {
 				throw new Exception ('「Exceptionって知ってる？<br>知らないよね。<br>じゃあいいや、気にしないでねｗ」');
 			}
-            //TODO
-	        //print_r($row);
-            //echo '<hr>row<br>';
 			$arr_com[ ] = $row;
-			//print('<hr>id=' . $row['id']);
-			//print('<br>iid=' .  $arr_com[0]['iid']);
-			//print('<br>cline=' . $row['cline']);
-			//print('<br>cowner=' . $row['cowner']);
 		}
-		//echo '<hr>';
     return $arr_com;
 	//func
 	}
@@ -72,15 +64,13 @@ class DbClass{
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db(TB_NAME, $link);
+		$db_selected = mysql_select_db('researchstudent_sql', $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
 		mysql_set_charset('utf8');
-		//echo $url.'<hr>';
+		//echo '<hr>URL='. $url;
 		//$result = mysql_query('SELECT pname FROM pict WHERE url = "'.$url.'"');
-    //echo '<hr>Result=';
-     //     print_r($result);
 
 		$result = mysql_query('SELECT pname FROM pict WHERE url = "'.$url.'"');
 		//$result = mysql_query('SELECT pname FROM pict WHERE url = "yab"');
@@ -89,20 +79,12 @@ class DbClass{
 		}
 		mysql_close($link);
 		$arr_com = 'default';
-		//$row = mysql_fetch_assoc($result);
-
-	  //echo 'Row=';
-       //   print_r($row);
 
 		while($row = mysql_fetch_assoc($result)){
             //TODO
 	  //echo 'Row=';
        //   print_r($row);
 			$arr_com = $row['pname'];
-			//print('<hr>id=' . $row['id']);
-			//print('<br>iid=' .  $arr_com[0]['iid']);
-			//print('<br>cline=' . $row['cline']);
-			//print('<br>cowner=' . $row['cowner']);
 		}
 		return $arr_com;
 	//func
@@ -120,7 +102,7 @@ class DbClass{
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db(TB_NAME, $link);
+		$db_selected = mysql_select_db('researchstudent_sql', $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
@@ -152,6 +134,8 @@ class DbClass{
      * @param 画像ID$id
      * @output ＄pname
      */
+
+
 	public function imageGet($id){
 		// MySQLに対する処理
 		$link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi');

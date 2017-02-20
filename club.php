@@ -15,6 +15,9 @@ class imageup{
     $input_filen = $_POST['filen'];
 //    $input_opt = $_POST['opt'];
 
+//new return
+    $ret_pname = $input_filen;
+
     if (is_uploaded_file($_FILES["upfile"]["tmp_name"])) {
       if (move_uploaded_file($_FILES["upfile"]["tmp_name"], "files/" . $_FILES["upfile"]["name"])) {
         chmod("files/" . $_FILES["upfile"]["name"], 0644);
@@ -32,6 +35,7 @@ class imageup{
     } else {
       echo "ファイルが選択されていません。";
     }
+    return $ret_pname;
   }
 
 // *************************
@@ -293,7 +297,17 @@ else if($input_mode == '_d'){
 }
 else{
     $photoup = new imageup();
-    $photoup->up_red();
+//TODO
+    //$photoup->up_red();
+    $ret_pname = $photoup->up_red();
+    //return $ret_pname;
+    echo '<hr>image name=' . $ret_pname . '<hr>' ;
+
+    //画像の登録
+    $uploadDb = new UpDb($ret_pname);
+    $uploadDb->registPictName();
+    $uploadDb->registOwnerName();
+
 }
 
 ?>
