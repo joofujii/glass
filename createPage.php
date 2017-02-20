@@ -128,8 +128,8 @@ echo <<< EOM
 EOM;
 
 //Speaker
-    $showSpeaker = new Speak\Show();
-    //$showSpeaker = new Speaker\Show();
+    //$showSpeaker = new Speak\Show();
+    $showSpeaker = new Speaker\Show();
 
     $showSpeaker->showList($spk);
 //    if($spk == 11){
