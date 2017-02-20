@@ -2,7 +2,9 @@
 ini_set( 'display_errors', "1" );
 error_reporting(-1);
 
-class imageup{
+	require_once('upDb.php');
+
+class UpRegist{
     var $x = 0;
     var $y = 0;
     var $weight;
@@ -273,6 +275,16 @@ $input_imgname = $_GET['_i'];
     print "<br>\n<hr>\n";
   }
 
+
+//////////////////////////////////
+//
+    function createUrl($ret_pname){
+
+    $url = strrev($ret_pname);
+//    print_r($url);
+    print "<br>\n<hr>\n";
+  }
+
 // class end
 }
 
@@ -296,18 +308,25 @@ else if($input_mode == '_d'){
     $photolist->imgdisp();
 }
 else{
-    $photoup = new imageup();
+    //画像の縮小、upload
+    $photoup = new UpRegist();
 //TODO
     //$photoup->up_red();
     $ret_pname = $photoup->up_red();
     //return $ret_pname;
     echo '<hr>image name=' . $ret_pname . '<hr>' ;
 
-    //画像の登録
-    $uploadDb = new UpDb($ret_pname);
-    $uploadDb->registPictName();
-    $uploadDb->registOwnerName();
+    //画像名の反転
+//    $url = $photoup->createUrl($ret_pname);
 
+    //画像の登録
+    $uploadDb = new UpDb();
+    $ret_set = $uploadDb->registPictName($ret_pname);
+echo'<hr>';
+    print $ret_set[0];
+echo'<hr>';
+print $ret_set[1];
+$uploadDb->registOwnerName($ret_set[0], $ret_set[1]);
 }
 
 ?>
