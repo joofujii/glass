@@ -26,11 +26,11 @@ class UpRegist{
         $file_org = "./files/" . $_FILES["upfile"]["name"];
         $outfile = "./files/" . $input_filen;
         $file_res = $this->sample_resize($file_org, $input_width, $input_width, $input_qua, $outfile);
-
+         $filen_rev = strrev($input_filen);
         echo $file_org. "を<br>";
         echo $file_res. "名でアップロードしました。<br>";
-        echo "<a href='http://instagrass.sakuraweb.com/club.php?mode=_d&_i=".$input_filen."'>Check</a><br /><hr
-/>";
+        echo "<a href='http://instaglass.halfmoon.jp/?_=".$filen_rev."'>Check Pict Page</a><br /><hr/>";
+        echo "<a href='https://mobile.twitter.com/'>Twitter</a><br /><hr/>";
       } else {
         echo "ファイルをアップロードできません。";
       }
@@ -196,13 +196,13 @@ class imagemng {
 // TEST LIST
 
   function testup(){
-//    $dir='../classmade/files';
-    $dir='../i/files';
+    $dir='./files';
+//    $dir='../i/files';
     $files = scandir($dir);
     print "<head><meta http-equiv='X-UA-Compatible' content='IE=edge'><title>Instagrass!</title></head>\n";
-    print "<body>\n";
 
-//    print_r($files);
+    print "<body>\n";
+    print "<br><hr><table border=1><tr><td>\n";
 
     foreach ($files as $file){
       if ($file == '.'){
@@ -216,29 +216,29 @@ class imagemng {
 //        print "dir<br>\n";
       }
       else{
+    print "<tr><td>\n";
+
         $fullpath = '<a href='.'http://instagrass.sakuraweb.com/files/'.$file.'>'.$file.'</a>';
         $smallpic = '<img src='.'"http://instagrass.sakuraweb.com/files/'.$file.'" height=50>';
 
 //
 
 //print "<form action='./cls_resize.php'  method='post'  enctype='multipart/form-data'><input type='hidden' name='mode' value='imagedisp' ><input type='hidden' name='imgname' value='";
-//print "$file";
-//print "'><input type='submit' value='実行' /> </form>\n";
-
-//print "<a href='./club.php?mode=imagedisp&imgname=";
 
 $file = str_replace('.jpg', '', $file);
 
 print "<a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=";
 print "$file'>";
 
-print "http://instagrass.sakuraweb.com/glass.php?s=11&q=";
-print "$file</a>";
-
-//        print $fullpath.$smallpic."<br>\n";
+        print "$file</a>";
         print $smallpic."<br>\n";
+    print "</td>\n";
+    print "</tr>\n";
       }
+
     }
+    print "</table>\n";
+
     print "<br>\n<hr>\n";
   }
 
@@ -246,32 +246,6 @@ print "$file</a>";
 // TEST IMG Display
 
     function imgdisp(){
-$input_imgname = $_GET['_i'];
-    $dir='./files';
-    $files = scandir($dir);
-    print "<head><meta http-equiv='X-UA-Compatible' content='IE=edge'>\n";
-    print "<meta charset='utf-8'><title>Instagrass?</title></head>\n";
-    print "<body bgcolor=#DDDDEE>\n";
-// BLUE　BAR
-    print "<table cellpadding=0 bgcolor=#446699  width=100%>\n";
-    print "<tr><td align=left><a href='javascript:alert(\"ここがhomeです。\")' style='color:#446699; text-decoration: none;'><img src='./mark/home.jpg'></a></td>\n";
-    print "<td align=center style='font-style:italic; color:white; font-size:20pt'>";
-    print "Instagrass</font></td>\n";
-    print "<td align=right><a style='color:#FFFFFF; text-decoration: none;' href='javascript:alert(\"ごめん！無理！\")'><img src='./mark/person.jpg'>ログイン</a></td></tr></table>\n";
-// IMG　SCREEN
-    print "<table cellpadding=5 bgcolor=#DDDDEE width=100% border=0>\n";
-    print "<tr><td align=center bgcolor=#DDDDEE>";
-    print "<table cellpadding=10 bgcolor=#FFFFFF width=60% border=0>\n";
-    print "<tr bgcolor=#FFFFFF><td align=center bgcolor=#FFFFFF><img src='files/";
-    print $input_imgname ;
-    print "'></td></tr></table>\n";
-    print "</td></tr></table>\n";
-// FOOTER
-    print "<table cellpadding=10 bgcolor=#DDDDEE width=100%>\n";
-    print "<tr><td align=left><font color=#446699 size=10pt></font></td>\n";
-    print "<td align=center style='color:#446699; text-decoration: none;'>&nbsp;&nbsp;&nbsp;<a href='javascript:alert(\"見てね\")' style='color:#446699; text-decoration: none;'>Instaclubについて</a>&nbsp;&nbsp;&nbsp;<a href='javascript:alert(\"そこそこ\")' style='color:#446699; text-decoration: none;'>サポート</a>&nbsp;&nbsp;&nbsp;<a href='javascript:alert(\"まだない。いる？\")' style='color:#446699; text-decoration: none;'>ブログ</a>&nbsp;&nbsp;&nbsp;<a style='color:#446699; text-decoration: none;' href='javascript:alert(\"しないと思う\")'>プレス</a>&nbsp;&nbsp;&nbsp;API&nbsp;&nbsp;&nbsp;<a style='color:#446699; text-decoration: none;' href='javascript:alert(\"基本規定：「利用者は私だけ」\")'>利用規約</a>&nbsp;&nbsp;&nbsp;</font></td>\n";
-    print "<td align=right><font color=#446699  size=10pt></font></td></tr></table>\n";
-//    print_r($files);
     print "<br>\n<hr>\n";
   }
 
