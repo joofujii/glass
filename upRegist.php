@@ -193,47 +193,34 @@ class imagemng {
   }
 
 //////////////////////////////////
-// TEST LIST
+// 画像一覧表示
 
   function testup(){
     $dir='./files';
-//    $dir='../i/files';
     $files = scandir($dir);
     print "<head><meta http-equiv='X-UA-Compatible' content='IE=edge'><title>Instagrass!</title></head>\n";
 
     print "<body>\n";
-    print "<br><hr><table border=1><tr><td>\n";
+    print "<br><hr>\n";
+    print "<table border=1>\n";
 
     foreach ($files as $file){
       if ($file == '.'){
-//        print "dir<br>\n";
-//        break;
       }
       else if ($file == '..'){
-//        print "dir<br>\n";
       }
       else if ($file == 'index.html'){
-//        print "dir<br>\n";
       }
       else{
-    print "<tr><td>\n";
+      print "<tr>\n";
 
-        $fullpath = '<a href='.'http://instagrass.sakuraweb.com/files/'.$file.'>'.$file.'</a>';
-        $smallpic = '<img src='.'"http://instagrass.sakuraweb.com/files/'.$file.'" height=50>';
-
-//
-
-//print "<form action='./cls_resize.php'  method='post'  enctype='multipart/form-data'><input type='hidden' name='mode' value='imagedisp' ><input type='hidden' name='imgname' value='";
-
-$file = str_replace('.jpg', '', $file);
-
-print "<a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=";
-print "$file'>";
-
-        print "$file</a>";
-        print $smallpic."<br>\n";
-    print "</td>\n";
-    print "</tr>\n";
+      $fullpath = '<a href='.'http://instagrass.sakuraweb.com/files/'.$file.'>'.$file.'</a>';
+      $smallpic = '<img src='.'"http://instagrass.sakuraweb.com/files/'.$file.'" height=50>';
+      $file = str_replace('.jpg', '', $file);
+      //print "<td><a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=".$file."'>".$file."</a></td>";
+      print "<td><a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=".$file."'>".$file."</a></td>";
+      print "<td>".$smallpic."</td>\n";
+      print "</tr>\n";
       }
 
     }
