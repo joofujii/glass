@@ -176,36 +176,33 @@ EOM;
         try{
             $dbTake = new DbClass;
             $arr_comment = $dbTake->dbGet($gid);
+            $iine_count = $dbTake->iineGet($gid);
         }
         catch(Exception $e){
     	    echo '<hr>';
     	    print $e->getMessage();
     	    echo '<hr>';
-    }
-
-    date_default_timezone_set('Asia/Tokyo');
+        }
+        date_default_timezone_set('Asia/Tokyo');
 
     echo <<< EOM
 <!-- IINE ! -->
 <div style='margin-top:20px;margin-bottom:20px;'>
-<div style='font-size:22pt;float:left;text-align:left;margin-left:50px;'>いいね ！
+<div style='font-size:22pt;float:left;text-align:left;margin-left:350px;'>いいね ！
 EOM;
-
-echo count($arr_comment);
-
-echo <<< EOM
+        echo $iine_count;
+        echo <<< EOM
 件</div>
-<div style='font-size:20pt;text-align:right;margin-right:50px;'>
+<div style='font-size:20pt;text-align:right;margin-right:150px;'>
 EOM;
 
-echo date( "H", getlastmod() );
-
-echo <<< EOM
+        echo date( "H", getlastmod() );
+        echo <<< EOM
 時間前</div>
 </div>
 <div style='clear:both;'></div>
 EOM;
-    return $arr_comment;
+        return $arr_comment;
     }
 
     /*

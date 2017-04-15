@@ -2,17 +2,16 @@
 ini_set( 'display_errors', "1" );
 error_reporting(-1);
 
-	//require_once('/conf/coolFactor.php');
+//require_once('/conf/coolFactor.php');
+define('DB_SERVER', 'mysql475.db.sakura.ne.jp');
+define('DB_USER', 'researchstudent');
+define('DB_SALTY', '098098poi');
+define('DB_NAME', 'researchstudent_sql');
 
-	define('DB_SERVER', 'mysql475.db.sakura.ne.jp');
-	define('DB_NAME', 'researchstudent');
-	define('DB_SALTY', '098098poi');
-	define('TB_NAME', 'researchstudent_sql');
-
-  /*
-   * DBに対するアクセスCLASS
-   *
-   */
+/*
+* DBに対するアクセスCLASS
+*
+*/
 class DbClass{
 
     /*
@@ -21,13 +20,13 @@ class DbClass{
      * @param glass番号gid
      * @output 要素配列？
      */
-	public function dbGet($gid){
+    public function dbGet($gid){
 		// MySQLに対する処理
-		$link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi');
+		$link = mysql_connect(DB_SERVER, DB_USER, '098098poi');
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db(TB_NAME, $link);
+		$db_selected = mysql_select_db(DB_NAME, $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
@@ -47,11 +46,34 @@ class DbClass{
 			}
 			$arr_com[ ] = $row;
 		}
-    return $arr_com;
+        return $arr_com;
+	//func
+    }
+
+    /*
+     * いいねカウントの取得
+     *
+     * @param glass番号gid
+     * @output $iine
+     */
+    public function iineGet($gid)
+    {
+        // MySQLに対する処理
+	$link = mysql_connect(DB_SERVER, DB_USER, '098098poi');
+	if (!$link) {
+	    die('接続失敗です。'.mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected){
+	    die('データベース選択失敗です。'.mysql_error());
+	}
+	mysql_set_charset('utf8');
+	$result = mysql_query('SELECT iine FROM glass WHERE id = "'.$gid.'"');
+	mysql_close($link);
+        $row = mysql_fetch_assoc($result);
+        return $row['iine'];
 	//func
 	}
-
-
     /*
      * 画像名pnameの要素取得
      *
@@ -60,11 +82,11 @@ class DbClass{
      */
 	public function pnameGet($url){
 		// MySQLに対する処理
-		$link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi');
+		$link = mysql_connect(DB_SERVER, DB_USER, '098098poi');
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db('researchstudent_sql', $link);
+		$db_selected = mysql_select_db(DB_NAME, $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
@@ -98,11 +120,11 @@ class DbClass{
      */
 	public function gidGet($url){
 		// MySQLに対する処理
-		$link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi');
+		$link = mysql_connect(DB_SERVER, DB_USER, '098098poi');
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db('researchstudent_sql', $link);
+		$db_selected = mysql_select_db(DB_NAME, $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}
@@ -138,11 +160,11 @@ class DbClass{
 
 	public function imageGet($id){
 		// MySQLに対する処理
-		$link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi');
+		$link = mysql_connect(DB_SERVER, DB_USER, '098098poi');
 		if (!$link) {
 			die('接続失敗です。'.mysql_error());
 		}
-		$db_selected = mysql_select_db(TB_NAME, $link);
+		$db_selected = mysql_select_db(DB_NAME, $link);
 		if (!$db_selected){
 			die('データベース選択失敗です。'.mysql_error());
 		}

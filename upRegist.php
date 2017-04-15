@@ -195,7 +195,7 @@ class imagemng {
 //////////////////////////////////
 // 画像一覧表示
 
-  function testup(){
+  function testup($oid, $regist_d, $first_c){
     $dir='./files';
     $files = scandir($dir);
     print "<head><meta http-equiv='X-UA-Compatible' content='IE=edge'><title>Instagrass!</title></head>\n";
@@ -203,6 +203,13 @@ class imagemng {
     print "<body>\n";
     print "<br><hr>\n";
     print "<table border=1>\n";
+    print "<tr>\n";
+    print "<td>owner<br> name</td>\n";
+    print "<td>register<br>date</td>\n";
+    print "<td>first<br>comment</td>\n";
+    print "<td>picture<br>name</td>\n";
+    print "<td>picture<br>image</td>\n";
+    print "</tr>\n";
 
     foreach ($files as $file){
       if ($file == '.'){
@@ -218,15 +225,19 @@ class imagemng {
       $smallpic = '<img src='.'"http://instagrass.sakuraweb.com/files/'.$file.'" height=50>';
       $file = str_replace('.jpg', '', $file);
       //print "<td><a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=".$file."'>".$file."</a></td>";
+
+      print "<td>".$oid."</td>\n";
+      print "<td>".$regist_d."</td>\n";
+      print "<td>".$first_c."</td>\n";
       print "<td><a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=".$file."'>".$file."</a></td>";
       print "<td>".$smallpic."</td>\n";
       print "</tr>\n";
       }
-
     }
+//foreach END
     print "</table>\n";
-
     print "<br>\n<hr>\n";
+
   }
 
 //////////////////////////////////
@@ -242,16 +253,12 @@ class imagemng {
     function createUrl($ret_pname){
 
     $url = strrev($ret_pname);
-//    print_r($url);
     print "<br>\n<hr>\n";
   }
 
 // class end
 }
 
-//$input_mode = (int)$_POST['mode'];
-//$input_mode = $_POST['mode'];
-//if(isset($input_mode)){
 //if(!is_null($_GET['mode'])){
 if(!isset($_POST['mode'])){
     $input_mode = $_GET['mode'];
@@ -261,8 +268,12 @@ else{
     print "protocol:POST input_modo: ".$input_mode."<hr>";
 }
 if($input_mode == 'testup'){
+    //TODO
+    $oid = 11;
+    $regist_d = 'ABC';
+    $first_c = 'xyz';
     $photolist = new imagemng();
-    $photolist->testup();
+    $photolist->testup($oid, $regist_d, $first_c);
 }
 else if($input_mode == '_d'){
     $photolist = new imagemng();
