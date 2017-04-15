@@ -4,9 +4,17 @@ ini_set( 'display_errors', "1" );
 error_reporting(-1);
 
 //DBアクセス
-require_once '/home/researchstudent/www/sql/dbClass.php';
+//require_once '/home/researchstudent/www/sql/dbClass.php';
+require_once 'dbClass.php';
+//require_once 'model/dbPict.php';
+require_once 'model/dbGlass.php';
+require_once 'model/dbComm.php';
+
 // Class名と member関数名が同じ2クラスを取得（但しnamespace付き）
-require_once '/home/researchstudent/www/i/show1.php';
+
+//require_once '/home/researchstudent/www/i/show1.php';
+require_once 'show1.php';
+
 require_once 'show2.php';
 // trait付きクラス
 require_once 'dateView.php';
@@ -174,9 +182,10 @@ EOM;
 
         // MySQLに対する処理
         try{
-            $dbTake = new DbClass;
-            $arr_comment = $dbTake->dbGet($gid);
-            $iine_count = $dbTake->iineGet($gid);
+            $comm_inst = new DbComm;
+            $iine_inst = new DbGlass;
+            $arr_comment = $comm_inst->dbGet($gid);
+            $iine_count = $iine_inst->iineGet($gid);
         }
         catch(Exception $e){
     	    echo '<hr>';
@@ -188,12 +197,12 @@ EOM;
     echo <<< EOM
 <!-- IINE ! -->
 <div style='margin-top:20px;margin-bottom:20px;'>
-<div style='font-size:22pt;float:left;text-align:left;margin-left:350px;'>いいね ！
+<div style='font-size:18pt;float:left;text-align:left;margin-left:150px;'>いいね！
 EOM;
         echo $iine_count;
         echo <<< EOM
 件</div>
-<div style='font-size:20pt;text-align:right;margin-right:150px;'>
+<div style='font-size:18pt;text-align:right;margin-right:100px;'>
 EOM;
 
         echo date( "H", getlastmod() );
