@@ -1,0 +1,38 @@
+<html> <head>
+ <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> 
+<title>Image Upload</title> </head> 
+<body>
+<br>
+ <font size=3>アップロード　メニュー<hr />
+
+<form action="./club.php" method="post"  enctype="multipart/form-data"> 
+機能選択<br />
+ファイル一覧 :<input type="radio" name="mode" value="listup" >
+／アップロード:<input type="radio" name="mode" value="upload" checked> <hr /> 
+
+アップロード オプション <br /> 
+縮小:<input type="radio" name="opt" value="reduction" checked> 
+原寸(予定):<input type="radio" name="opt" value="original" /> <hr /> 
+
+アップロード 設定<br /> 
+新ファイル名:<input type="text" name="filen" value=""  size="10" /> <br /> 
+新ファイル幅:<input type="text" name="width" value="800"  size="10" /> <br /> 
+画質(1 - 100):<input type="text" name="qua" value="75"  size="10" /> <br /> 
+ローカルファイル:<input type="file" name="upfile" size="30" />
+<br /> 
+<input type="submit" value="実行" /> </form>
+
+<br>
+<hr>
+
+
+
+ <font size=3>　URL check
+<br />
+<form action="./club.php" method="post"  > 
+<br />
+<input type="hidden" name="mode" value="testup" >
+<br /> 
+<input type="submit" value="実行" /> </form>
+
+ </body> </html>
