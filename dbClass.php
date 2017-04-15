@@ -18,7 +18,7 @@ class DbClass{
      * commテーブルの要素取得
      *
      * @param glass番号gid
-     * @output 要素配列？
+     * @output 要素配列
      */
     public function dbGet($gid){
 		// MySQLに対する処理
@@ -184,7 +184,44 @@ class DbClass{
 		}
         //print_r($arr_com);
 		return $arr_com[0]['pname'];
+	}
+
+    /*
+     * テーブルpictから全ての取得
+     *
+     * @param 画像ID$id
+     * @output ＄pname
+     */
+	public function getPict($id){
+		// MySQLに対する処理
+		$link = mysql_connect('mysql475.db.sakura.ne.jp', 'researchstudent', '098098poi');
+		if (!$link) {
+			die('接続失敗です。'.mysql_error());
+		}
+		$db_selected = mysql_select_db(DB_NAME, $link);
+		if (!$db_selected){
+			die('データベース選択失敗です。'.mysql_error());
+		}
+		mysql_set_charset('utf8');
+		//$result = mysql_query("SELECT * FROM pict WHERE id = $id");
+		$result = mysql_query("SELECT * FROM pict");
+		if (!$result) {
+			die('imageGetクエリーが失敗しました。'.mysql_error());
+		}
+		mysql_close($link);
+        $arr_com = array();
+		while($row = mysql_fetch_assoc($result)){
+			//if ($row['pname'] == 'XXX') {
+			//	throw new Exception ('「Exceptionって知ってる？<br>知らないよね。<br>じゃあいいや、気にしないでねｗ」');
+			//}
+			$arr_com[ ] = $row;
+		}
+        //print_r($arr_com);
+//		return $arr_com[0]['pname'];
+		return $arr_com;
+
     //func
 	}
+
 //class
 }

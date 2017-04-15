@@ -3,13 +3,15 @@ ini_set( 'display_errors', "1" );
 error_reporting(-1);
 
 	require_once('upDb.php');
+	require_once('dbClass.php');
+//DBアクセス
+//require_once '/home/researchstudent/www/sql/dbClass.php';
 
+//glass
+//define('URL_DOMAIN', 'http://www.researchstudent.sakura.ne.jp/glass/');
+//sql
+define('URL_DOMAIN', 'http://www.researchstudent.sakura.ne.jp/sql/');
 class UpRegist{
-    var $x = 0;
-    var $y = 0;
-    var $weight;
-    var $first_weight;
-
 // *************************
     function up_red(){
     $input_width = (int)$_POST['width'];
@@ -29,7 +31,8 @@ class UpRegist{
          $filen_rev = strrev($input_filen);
         echo $file_org. "を<br>";
         echo $file_res. "名でアップロードしました。<br>";
-        echo "<a href='http://instaglass.halfmoon.jp/?_=".$filen_rev."'>Check Pict Page</a><br /><hr/>";
+//        echo "<a href='http://www.researchstudent.sakura.ne.jp/sql/?_=".$filen_rev."'>Check the Page</a><br /><hr/>";
+        echo "<a href='".URL_DOMAIN."?_=".$filen_rev."'>Check the Page</a><br /><hr/>";
         echo "<a href='https://mobile.twitter.com/'>Twitter</a><br /><hr/>";
       } else {
         echo "ファイルをアップロードできません。";
@@ -119,8 +122,8 @@ class UpRegist{
 // $new_fname : 保存先と画像名
 // クオリティ
 
-    echo '---Resize_width---'.$resize_width.'---<br>';
-    echo '---Resize_height---'.$resize_height.'---<br>';
+//    echo '---Resize_width---'.$resize_width.'---<br>';
+//    echo '---Resize_height---'.$resize_height.'---<br>';
 //    $quality = 75;
     $quality = $resize_qua;
     switch ($image_type) {
@@ -146,9 +149,9 @@ default:
 
 // 不要になった画像データ削除
     imagedestroy($im);
-    echo '---new_image---'.$new_image.'---<br>';
+    echo 'new_image---'.$new_image.'---<br>';
     imagedestroy($new_image);
-    echo '---orig_file---'.$orig_file.'---<br>';
+    echo 'orig_file---'.$orig_file.'---<br>';
 //  imagedestroy($orig_file);
     unlink ("$orig_file");
     return $new_fnamex;
@@ -195,23 +198,39 @@ class imagemng {
 //////////////////////////////////
 // 画像一覧表示
 
-  function testup($oid, $regist_d, $first_c){
+  function testup($gid, $pid, $oid, $oname, $pname, $url){
     $dir='./files';
     $files = scandir($dir);
+
+//Todo
+$pict_inst = new DbClass;
+$pict_array = $pict_inst ->getPict($gid);
+print_r($pict_array, false);
+
     print "<head><meta http-equiv='X-UA-Compatible' content='IE=edge'><title>Instagrass!</title></head>\n";
 
     print "<body>\n";
     print "<br><hr>\n";
     print "<table border=1>\n";
     print "<tr>\n";
-    print "<td>owner<br> name</td>\n";
-    print "<td>register<br>date</td>\n";
-    print "<td>first<br>comment</td>\n";
+    print "<td>glass<br> ID</td>\n";
+    print "<td>pict<br>ID</td>\n";
+    print "<td>owner<br>ID</td>\n";
+    print "<td>owner<br>name</td>\n";
     print "<td>picture<br>name</td>\n";
     print "<td>picture<br>image</td>\n";
+    print "<td>page<br>URL</td>\n";
     print "</tr>\n";
 
-    foreach ($files as $file){
+//Todo
+
+    //foreach ($files as $file){
+    foreach ($pict_array as $file){
+$pid = $gid = $file['id'];
+$oid = 11;
+$pname = $file['pname'];
+$url = $file['url'];
+$file = $pname.'.jpg';
       if ($file == '.'){
       }
       else if ($file == '..'){
@@ -226,11 +245,13 @@ class imagemng {
       $file = str_replace('.jpg', '', $file);
       //print "<td><a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=".$file."'>".$file."</a></td>";
 
-      print "<td>".$oid."</td>\n";
-      print "<td>".$regist_d."</td>\n";
-      print "<td>".$first_c."</td>\n";
-      print "<td><a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=".$file."'>".$file."</a></td>";
+      print "<td>".$gid."</td>\n";
+      print "<td>".$pid."</td>\n";
+      print "<td>".$pname."</td>\n";
+      print "<td>".'oname'."</td>\n";
+      print "<td>".$pname."</td>";
       print "<td>".$smallpic."</td>\n";
+      print "<td><a href='http://instagrass.sakuraweb.com/glass.php?s=11&q=".$file."'>".$pname."</a></td>\n";
       print "</tr>\n";
       }
     }
@@ -269,11 +290,14 @@ else{
 }
 if($input_mode == 'testup'){
     //TODO
-    $oid = 11;
-    $regist_d = 'ABC';
-    $first_c = 'xyz';
+    $gid = 11;
+    $pid = 'p';
+    $oid = 'o';
+    $oname = 11;
+    $pname = 11;
+    $url = 'ABC';
     $photolist = new imagemng();
-    $photolist->testup($oid, $regist_d, $first_c);
+    $photolist->testup($gid, $pid, $oid, $oname, $pname, $url);
 }
 else if($input_mode == '_d'){
     $photolist = new imagemng();
